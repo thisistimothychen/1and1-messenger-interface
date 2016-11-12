@@ -1,6 +1,6 @@
-# Messenger Platform Sample
+# 1&1 Cloud Server Facebook Messenger Interface
 
-This is a sample project showcasing the Messenger Platform. You can go through the [walk-through](https://developers.facebook.com/docs/messenger-platform/quickstart) to understand this code in more detail. The [Complete Guide](https://developers.facebook.com/docs/messenger-platform/implementation) goes deeper into the features available.
+Created at YHack 2016.
+Facebook Messenger interface for managing 1&1's Cloud Server Services.
 
-Visit the [dev site](https://developers.facebook.com/docs/messenger-platform/) to find out more details about the Messenger Platform.
-
+Boilerplate code from https://github.com/fbsamples/messenger-platform-samples.
