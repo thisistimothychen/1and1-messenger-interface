@@ -327,13 +327,13 @@ function text_processing(senderID, messageText) {
   sendTextMessage(senderID, "Processing your request...");
   
   if (messageText.toLowerCase().substring(0,13) == "create server") {
-    return createServer(messageText.substring(14));
+    return createServer(senderID, messageText.substring(14));
   }
   // return "test";
 }
 
 
-function createServer(serverName) {
+function createServer(senderID, serverName) {
   request({
     uri: 'https://cloudpanel-api.1and1.com/v1/servers',
     method: 'POST',
