@@ -384,9 +384,10 @@ function showServers(senderID) {
       sendTextMessage(senderID, "Servers:");
       for (var i = 0; i < body.length; i++) {
         if (body[i].status != null) {
-          state = body[i].status.state;
+          sendTextMessage(senderID, body[i].name + " (" + body[i].description + "): " + body[i].status.state);
+        } else {
+          sendTextMessage(senderID, body[i].name + " (" + body[i].description + ")");
         }
-        sendTextMessage(senderID, body[i].name + " (" + body[i].description + "): " + state);
       }
     } else {
       sendTextMessage("Failed to connect with 1&1 Cloud Server");
