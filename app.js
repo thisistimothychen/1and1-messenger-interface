@@ -383,7 +383,7 @@ function showServers(senderID) {
       var str = "{\"servers\":" + body + "}";
       body = JSON.parse(str).servers;
       console.log(body);
-      sendTextMessage(senderID, "Servers Listing (" + body.count + " total):");
+      sendTextMessage(senderID, "Servers Listing (" + body.length + " total):");
       
       setTimeout(function() {
         for (var i = 0; i < body.length; i++) {
