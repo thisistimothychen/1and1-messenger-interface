@@ -381,14 +381,15 @@ function showServers(senderID) {
   }, function (error, response, body) {
     if (!error && response.statusCode == 200) {
       console.log(body);
-      sendTextMessage(senderID, "Servers:");
-      for (var i = 0; i < body.length; i++) {
-        if (body[i].status != null) {
-          sendTextMessage(senderID, body[i].name + " (" + body[i].description + "): " + body[i].status.state);
-        } else {
-          sendTextMessage(senderID, body[i].name + " (" + body[i].description + ")");
-        }
-      }
+      sendTextMessage(senderID, "Servers: " + body.length);
+      // sendTextMessage(senderID, "Servers:");
+      // for (var i = 0; i < body.length; i++) {
+      //   if (body[i].status != null) {
+      //     sendTextMessage(senderID, body[i].name + " (" + body[i].description + "): " + body[i].status.state);
+      //   } else {
+      //     sendTextMessage(senderID, body[i].name + " (" + body[i].description + ")");
+      //   }
+      // }
     } else {
       sendTextMessage("Failed to connect with 1&1 Cloud Server");
     }
