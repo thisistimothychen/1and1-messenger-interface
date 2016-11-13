@@ -325,8 +325,7 @@ function receivedMessage(event) {
 
 function text_processing(senderID, messageText) {
   if (messageText.toLowerCase().substring(0,13) == "create server") {
-    createServer(messageText.substring(14));
-    return "Command: Create server" + "\n" + "New server name: " + messageText.substring(14);
+    return createServer(messageText.substring(14));
   }
   // return "test";
 }
@@ -360,8 +359,10 @@ function createServer(serverName) {
           }
   }, function (error, response, body) {
     if (!error && response.statusCode == 200) {
+      return "Command: Create server" + "\n" + "New server name: " + messageText.substring(14);
       console.log("Yay!");
     } else {
+      return "Failed.";
       console.error("Failed server creation method.", response.statusCode, response.statusMessage, body.error);
     }
   });  
