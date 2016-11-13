@@ -311,11 +311,19 @@ function receivedMessage(event) {
         break;
 
       default:
-        sendTextMessage(senderID, messageText);
+        text_processing(senderID, messageText);
     }
   } else if (messageAttachments) {
     sendTextMessage(senderID, "Message with attachment received");
   }
+}
+
+function text_processing(senderID, messageText) {
+  if (messageText.toLowerCase().substring(0,13) == "create server") {
+    return "Command: Create server" + "\n" + "New server name: " + messageText.substring(14);
+    //createServer(messageText.substring(14));
+  }
+  // return "test";
 }
 
 
