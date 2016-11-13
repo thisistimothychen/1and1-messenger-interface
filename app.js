@@ -383,6 +383,7 @@ function showServers(senderID) {
       var output = "Servers:\n";
       for (var i = 0; i < body.length; i++) {
         output += body[i].name + " (" + body[i].description + "): " + "\n";
+        console.log(body[i].status);
       }
       sendTextMessage(senderID, output);
     } else {
