@@ -328,8 +328,11 @@ function text_processing(senderID, messageText) {
   
   if (messageText.toLowerCase().substring(0,13) == "create server") {
     return createServer(senderID, messageText.substring(14));
+  } else if (messageText.toLowerCase() == "show servers") {
+    return showServers(senderID);
+  } else {
+    sendTextMessage(senderID, "Invalid request");
   }
-  // return "test";
 }
 
 
@@ -365,12 +368,28 @@ function createServer(senderID, serverName) {
     } else if (response.statusCode == 400 && body.type == "REPEATED_PUBLIC_NAME") {
       sendTextMessage(senderID, "Cannot create server " + serverName + " (already exists)");
     } else {
-      return "Server creation failed.";
+      sendTextMessage("Server creation failed.");
     }
   });  
 }
 
-
+function showServers(senderID) {
+  request({
+    uri: 'https://cloudpanel-api.1and1.com/v1/servers',
+    method: 'GET',
+    headers: {'X-Token': XTOKEN}
+  }, function (error, response, body) {
+    if (!error && response.statusCode == 200) {
+      output = "Servers:\n";
+      for (var i = 0; i < result.length; i++) {
+        output += result[i].name + " (" + result[i].description + "): " + result[i].status.state + "\n";
+      }
+      sendTextMessage(senderID, output);
+    } else {
+      sendTextMessage("Failed to connect with 1&1 Cloud Server");
+    }
+  });  
+}
 
 
 
