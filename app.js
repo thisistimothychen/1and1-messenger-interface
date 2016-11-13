@@ -381,8 +381,8 @@ function showServers(senderID) {
   }, function (error, response, body) {
     if (!error && response.statusCode == 200) {
       var output = "Servers:\n";
-      for (var i = 0; i < result.length; i++) {
-        output += result[i].name + " (" + result[i].description + "): " + result[i].status.state + "\n";
+      for (var i = 0; i < body.length; i++) {
+        output += body[i].name + " (" + body[i].description + "): " + body[i].status.state + "\n";
       }
       sendTextMessage(senderID, output);
     } else {
