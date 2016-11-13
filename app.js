@@ -30,6 +30,10 @@ app.use(express.static('public'));
  * set them using environment variables or modifying the config file in /config.
  *
  */
+ 
+const XTOKEN = (process.env.MESSENGER_XTOKEN) ? 
+  process.env.MESSENGER_XTOKEN :
+  config.get('xToken');
 
 // App Secret can be retrieved from the App Dashboard
 const APP_SECRET = (process.env.MESSENGER_APP_SECRET) ? 
@@ -321,11 +325,77 @@ function receivedMessage(event) {
 
 function text_processing(senderID, messageText) {
   if (messageText.toLowerCase().substring(0,13) == "create server") {
+    createServer(messageText.substring(14));
     return "Command: Create server" + "\n" + "New server name: " + messageText.substring(14);
-    //createServer(messageText.substring(14));
   }
   // return "test";
 }
+
+
+function createServer(serverName) {
+  request({
+    uri: 'https://cloudpanel-api.1and1.com/v1/servers',
+    method: 'POST',
+    headers: {'X-Token': XTOKEN, 'Content-Type': 'application/json'},
+    json: { 
+            "name": serverName,
+            "description": "Temporary server description",
+            "hardware": {
+              "vcore": 2,
+              "cores_per_processor": 1,
+              "ram": 2,
+              "hdds": [
+              {
+                "size": 40,
+                "is_main": true
+              },
+              {
+                "size": 20,
+                "is_main": false
+              }
+              ]
+            },
+            "appliance_id": "B5F778B85C041347BCDCFC3172AB3F3C",
+            "datacenter_id": "908DC2072407C94C8054610AD5A53B8C"
+          }
+  }, function (error, response, body) {
+    if (!error && response.statusCode == 200) {
+      console.log("Yay!");
+    } else {
+      console.error("Failed server creation method.", response.statusCode, response.statusMessage, body.error);
+    }
+  });  
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 /*
