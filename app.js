@@ -424,11 +424,12 @@ function getServerID(senderID, serverName) {
         }
       }
       
+      console.log(serverID);
       return serverID;
     } else {
       sendTextMessage(senderID, "Failed to connect with 1&1 Cloud Server");
     }
-  });  
+  });
 }
 
 
