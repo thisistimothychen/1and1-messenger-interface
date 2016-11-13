@@ -380,7 +380,7 @@ function showServers(senderID) {
     headers: {'X-Token': XTOKEN}
   }, function (error, response, body) {
     if (!error && response.statusCode == 200) {
-      var str = "{servers:" + body + "}";
+      var str = "{\"servers\":" + body + "}";
       body = JSON.parse(str);
       console.log(body);
       sendTextMessage(senderID, "Servers: " + body.length);
