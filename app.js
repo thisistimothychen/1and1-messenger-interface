@@ -381,6 +381,7 @@ function showServers(senderID) {
   }, function (error, response, body) {
     if (!error && response.statusCode == 200) {
       console.log(body);
+      console.log("RESPONSE: \n\n\n" + response);
       sendTextMessage(senderID, "Servers: " + body.length);
       // sendTextMessage(senderID, "Servers:");
       // for (var i = 0; i < body.length; i++) {
