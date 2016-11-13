@@ -335,7 +335,8 @@ function text_processing(senderID, messageText) {
     return getServerID(senderID, messageText.substring(14));
   } else if (messageText.toLowerCase().substring(0,13) == "delete server") {
     sendTextMessage(senderID, "Processing your request...");
-    return deleteServer(senderID, messageText.substring(14));
+    var serverID = getServerID(senderID, serverName);
+    return deleteServer(senderID, serverID);
   } else {
     sendTextMessage(senderID, "Invalid request");
   }
@@ -432,8 +433,7 @@ function getServerID(senderID, serverName) {
   });
 }
 
-function deleteServer(senderID, serverName) {
-  var serverID = getServerID(senderID, serverName);
+function deleteServer(senderID, serverID) {
   console.log("SERVERID: " + serverID);
   
   request({
