@@ -335,8 +335,7 @@ function text_processing(senderID, messageText) {
     return getServerID(senderID, messageText.substring(14));
   } else if (messageText.toLowerCase().substring(0,13) == "delete server") {
     sendTextMessage(senderID, "Processing your request...");
-    var serverID = getServerID(senderID, serverName);
-    return deleteServer(senderID, serverID);
+    return deleteServer(senderID, messageText.substring(14));
   } else {
     sendTextMessage(senderID, "Invalid request");
   }
@@ -426,6 +425,7 @@ function getServerID(senderID, serverName) {
       }
       
       console.log(serverID);
+      sendTextMessage(senderID, serverID);
       return serverID;
     } else {
       sendTextMessage(senderID, "Failed to connect with 1&1 Cloud Server");
