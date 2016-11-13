@@ -380,11 +380,12 @@ function showServers(senderID) {
     headers: {'X-Token': XTOKEN}
   }, function (error, response, body) {
     if (!error && response.statusCode == 200) {
+      console.log(body);
       var output = "Servers:\n";
-      for (var i = 0; i < body.length; i++) {
-        output += body[i].name + " (" + body[i].description + "): " + "\n";
-        console.log(body[i].status);
-      }
+      // for (var i = 0; i < body.length; i++) {
+      //   output += body[i].name + " (" + body[i].description + "): " + "\n";
+      //   console.log(body[i].status);
+      // }
       sendTextMessage(senderID, output);
     } else {
       sendTextMessage("Failed to connect with 1&1 Cloud Server");
