@@ -441,8 +441,10 @@ function deleteServer(senderID, serverName) {
     qs: {'server_id': serverID},
     headers: {'X-Token': XTOKEN, 'Content-Type': 'application/json'}
   }, function (error, response, body) {
+    console.log("DELETED:\n\n\n");
+    console.log(body);
     if (!error && response.statusCode == 202) {
-      sendTextMessage(senderID, "Deleted server " + serverName);
+      sendTextMessage(senderID, "Deleting server " + serverName);
     } else {
       sendTextMessage("Server deletion failed.");
     }
