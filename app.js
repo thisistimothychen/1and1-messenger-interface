@@ -432,6 +432,22 @@ function getServerID(senderID, serverName) {
   });
 }
 
+function deleteServer(senderID, serverName) {
+  var serverID = getServerID(senderID, serverName);
+  
+  request({
+    uri: 'https://cloudpanel-api.1and1.com/v1/servers/' + serverID,
+    method: 'DELETE',
+    qs: {'server_id': serverID},
+    headers: {'X-Token': XTOKEN, 'Content-Type': 'application/json'}
+  }, function (error, response, body) {
+    if (!error && response.statusCode == 202) {
+      sendTextMessage(senderID, "Deleted server " + serverName);
+    } else {
+      sendTextMessage("Server deletion failed.");
+    }
+  });
+}
 
 
 
