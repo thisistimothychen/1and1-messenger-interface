@@ -311,7 +311,8 @@ function receivedMessage(event) {
         break;
 
       default:
-        text_processing(senderID, messageText);
+        var result = text_processing(senderID, messageText);
+        sendTextMessage(senderID, result);
     }
   } else if (messageAttachments) {
     sendTextMessage(senderID, "Message with attachment received");
