@@ -16,11 +16,10 @@ const
   config = require('config'),
   crypto = require('crypto'),
   express = require('express'),
-  https = require('https'),  
+  https = require('https'),
   request = require('request');
 
 var app = express();
-var _ = require('lodash');
 var Promise = require('Promise');
 app.set('port', process.env.PORT || 5000);
 app.set('view engine', 'ejs');
