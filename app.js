@@ -324,6 +324,8 @@ function receivedMessage(event) {
 }
 
 function text_processing(senderID, messageText) {
+  sendTextMessage(senderID, "Processing your request...");
+  
   if (messageText.toLowerCase().substring(0,13) == "create server") {
     return createServer(messageText.substring(14));
   }
