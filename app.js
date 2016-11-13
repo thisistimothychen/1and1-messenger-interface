@@ -382,7 +382,7 @@ function showServers(senderID) {
     if (!error && response.statusCode == 200) {
       var output = "Servers:\n";
       for (var i = 0; i < body.length; i++) {
-        output += body[i].name + " (" + body[i].description + "): " + body[i].status + "\n";
+        output += body[i].name + " (" + body[i].description + "): " + "\n";
       }
       sendTextMessage(senderID, output);
     } else {
