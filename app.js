@@ -361,9 +361,9 @@ function createServer(serverName) {
           }
   }, function (error, response, body) {
     if (!error && response.statusCode == 202) {
-      return "Command: Create server" + "\n" + "New server name: " + serverName;
+      sendTextMessage(senderID, "Command: Create server" + "\n" + "New server name: " + serverName);
     } else if (response.statusCode == 400 && body.type == "REPEATED_PUBLIC_NAME") {
-      return "Cannot create server " + serverName + ": Server already exists.";
+      sendTextMessage(senderID, "Cannot create server " + serverName + ": Server already exists.");
     } else {
       return "Failed.";
     }
