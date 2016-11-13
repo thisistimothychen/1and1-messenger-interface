@@ -324,11 +324,11 @@ function receivedMessage(event) {
 }
 
 function text_processing(senderID, messageText) {
-  sendTextMessage(senderID, "Processing your request...");
-  
   if (messageText.toLowerCase().substring(0,13) == "create server") {
+    sendTextMessage(senderID, "Processing your request...");
     return createServer(senderID, messageText.substring(14));
   } else if (messageText.toLowerCase() == "show servers") {
+    sendTextMessage(senderID, "Processing your request...");
     return showServers(senderID);
   } else {
     sendTextMessage(senderID, "Invalid request");
