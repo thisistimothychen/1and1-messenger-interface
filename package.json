@@ -20,8 +20,8 @@
     "ejs": "^2.4.2",
     "express": "^4.13.4",
     "request": "^2.72.0",
-    "promise": "*",
-    "lodash": "*"
+    "promise": "^7.1.1",
+    "lodash": "^4.16.6"
   },
   "engines": {
     "node": "~4.1.2"
