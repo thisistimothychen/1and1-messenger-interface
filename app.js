@@ -330,6 +330,12 @@ function text_processing(senderID, messageText) {
   } else if (messageText.toLowerCase() == "show servers") {
     sendTextMessage(senderID, "Processing your request...");
     return showServers(senderID);
+  } else if (messageText.toLowerCase().substring(0,13) == "get server id") {
+    sendTextMessage(senderID, "Processing your request...");
+    return getServerID(senderID, messageText.substring(14));
+  } else if (messageText.toLowerCase().substring(0,13) == "delete server") {
+    sendTextMessage(senderID, "Processing your request...");
+    return deleteServer(senderID, messageText.substring(14));
   } else {
     sendTextMessage(senderID, "Invalid request");
   }
@@ -395,12 +401,35 @@ function showServers(senderID) {
         }
       }, 1000);
     } else {
-      sendTextMessage("Failed to connect with 1&1 Cloud Server");
+      sendTextMessage(senderID, "Failed to connect with 1&1 Cloud Server");
     }
   });  
 }
 
-
+function getServerID(senderID, serverName) {
+  request({
+    uri: 'https://cloudpanel-api.1and1.com/v1/servers',
+    method: 'GET',
+    headers: {'X-Token': XTOKEN}
+  }, function (error, response, body) {
+    if (!error && response.statusCode == 200) {
+      var str = "{\"servers\":" + body + "}";
+      body = JSON.parse(str).servers;
+      console.log(body);
+      var serverID = "";
+      
+      for (var i = 0; i < body.length; i++) {
+        if (body[i].name == serverName) {
+          serverID = body[i].id;
+        }
+      }
+      
+      return serverID;
+    } else {
+      sendTextMessage(senderID, "Failed to connect with 1&1 Cloud Server");
+    }
+  });  
+}
 
 
 
