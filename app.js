@@ -383,14 +383,17 @@ function showServers(senderID) {
       var str = "{\"servers\":" + body + "}";
       body = JSON.parse(str).servers;
       console.log(body);
-      sendTextMessage(senderID, "Servers:");
-      for (var i = 0; i < body.length; i++) {
-        if (body[i].status != null) {
-          sendTextMessage(senderID, body[i].name + " (" + body[i].description + "): " + body[i].status.state);
-        } else {
-          sendTextMessage(senderID, body[i].name + " (" + body[i].description + ")");
+      sendTextMessage(senderID, "Servers Listing (" + body.count + " total):");
+      
+      setTimeout(function() {
+        for (var i = 0; i < body.length; i++) {
+          if (body[i].status != null) {
+            sendTextMessage(senderID, body[i].name + " (" + body[i].description + "): " + body[i].status.state);
+          } else {
+            sendTextMessage(senderID, body[i].name + " (" + body[i].description + ")");
+          }
         }
-      }
+      }, 1000);
     } else {
       sendTextMessage("Failed to connect with 1&1 Cloud Server");
     }
