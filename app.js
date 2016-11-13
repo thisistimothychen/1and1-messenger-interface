@@ -434,6 +434,7 @@ function getServerID(senderID, serverName) {
 
 function deleteServer(senderID, serverName) {
   var serverID = getServerID(senderID, serverName);
+  console.log("SERVERID: " + serverID);
   
   request({
     uri: 'https://cloudpanel-api.1and1.com/v1/servers/' + serverID,
