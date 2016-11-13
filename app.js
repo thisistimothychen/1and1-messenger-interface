@@ -364,7 +364,7 @@ function createServer(senderID, serverName) {
           }
   }, function (error, response, body) {
     if (!error && response.statusCode == 202) {
-      sendTextMessage(senderID, "Created server" + serverName);
+      sendTextMessage(senderID, "Created server " + serverName);
     } else if (response.statusCode == 400 && body.type == "REPEATED_PUBLIC_NAME") {
       sendTextMessage(senderID, "Cannot create server " + serverName + " (already exists)");
     } else {
