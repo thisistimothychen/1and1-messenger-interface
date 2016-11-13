@@ -445,7 +445,7 @@ function deleteServer(senderID, serverID) {
     console.log("DELETED:\n\n\n");
     console.log(body);
     if (!error && response.statusCode == 202) {
-      sendTextMessage(senderID, "Deleting server " + serverName);
+      sendTextMessage(senderID, "Deleting server " + body.name);
     } else {
       sendTextMessage("Server deletion failed.");
     }
