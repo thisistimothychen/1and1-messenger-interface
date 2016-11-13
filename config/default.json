@@ -1,6 +1,10 @@
 {
-    "appSecret": "82ff3c2cb33a69f3fcbae2d02b131521",
-    "pageAccessToken": "",
-    "validationToken": "yhack-is-awesome",
-    "serverURL": "heroku.com"
+  "appSecret": "82ff3c2cb33a69f3fcbae2d02b131521",
+  "pageAccessToken": "EAAWrmuqscqUBADQmM8ATXrvW9ycMLiYm7H8Tyn4ibOmeKrjqlduf9ZBNqFrj4n2CmvXvGcYXEAIaVom9aXZBsNZBEDOAR6lNR3iibsZBQI4O9E4VGxZAup5gxVp7NHmxVsfpv7UTMeBJki1Ko0VBxZAJywAHIdrlufqZAlkBHu8JgZDZD",
+  "validationToken": "yhack-is-awesome",
+  "serverURL": "heroku.com",
+  "cloud_serverID": "",
+  "cloud_ipID": "",
+  "cloud_apiKey": "f4f2bbcaf874fec8e22e44d3b22d4a10",
+  "xToken": "f4f2bbcaf874fec8e22e44d3b22d4a10"
 }
