@@ -332,44 +332,45 @@ function text_processing(senderID, messageText) {
 }
 
 function createServer(serverName) {
-  var promise = new Promise(function (resolve, reject) {
-      request({
-          url: 'https://cloudpanel-api.1and1.com/v1/servers',
-          method: 'POST',
-          headers: {'X-Token': XTOKEN, 'Content-Type': 'application/json'},
-          json: { 
-                  "name": serverName,
-                  "description": "Temporary server description",
-                  "hardware": {
-                    "vcore": 2,
-                    "cores_per_processor": 1,
-                    "ram": 2,
-                    "hdds": [
-                    {
-                      "size": 40,
-                      "is_main": true
-                    },
-                    {
-                      "size": 20,
-                      "is_main": false
-                    }
-                    ]
-                  },
-                  "appliance_id": "B5F778B85C041347BCDCFC3172AB3F3C",
-                  "datacenter_id": "908DC2072407C94C8054610AD5A53B8C"
-                }
-      }, function(err, res, body) {
-          if (err) reject(err);
-          else resolve(res);
-      });
-  });
-  
-  // Print POST status or error if any has been thrown
-  promise.then(function(success) {
-      sendTextMessage(senderID, "Creating server...");
-  }, function(err) {
-      sendTextMessage(senderID, "Error");
-  });
+  // var promise = new Promise(function (resolve, reject) {
+  //     request({
+  //         url: 'https://cloudpanel-api.1and1.com/v1/servers',
+  //         method: 'POST',
+  //         headers: {'X-Token': XTOKEN, 'Content-Type': 'application/json'},
+  //         json: { 
+  //                 "name": serverName,
+  //                 "description": "Temporary server description",
+  //                 "hardware": {
+  //                   "vcore": 2,
+  //                   "cores_per_processor": 1,
+  //                   "ram": 2,
+  //                   "hdds": [
+  //                   {
+  //                     "size": 40,
+  //                     "is_main": true
+  //                   },
+  //                   {
+  //                     "size": 20,
+  //                     "is_main": false
+  //                   }
+  //                   ]
+  //                 },
+  //                 "appliance_id": "B5F778B85C041347BCDCFC3172AB3F3C",
+  //                 "datacenter_id": "908DC2072407C94C8054610AD5A53B8C"
+  //               }
+  //     }, function(err, res, body) {
+  //         if (err) reject(err);
+  //         else resolve(res);
+  //     });
+  // });
+  // 
+  // // Print POST status or error if any has been thrown
+  // promise.then(function(success) {
+  //     sendTextMessage(senderID, "Creating server...");
+  // }, function(err) {
+  //     sendTextMessage(senderID, "Error");
+  // });
+  sendTextMessage(senderID, "Testing");
 }
 
 
