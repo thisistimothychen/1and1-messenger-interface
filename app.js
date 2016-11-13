@@ -381,7 +381,7 @@ function showServers(senderID) {
   }, function (error, response, body) {
     if (!error && response.statusCode == 200) {
       var str = "{servers:" + body + "}";
-      body = Json.parse(str);
+      body = JSON.parse(str);
       console.log(body);
       sendTextMessage(senderID, "Servers: " + body.length);
       // sendTextMessage(senderID, "Servers:");
