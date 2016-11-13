@@ -358,12 +358,13 @@ function createServer(serverName) {
             "datacenter_id": "908DC2072407C94C8054610AD5A53B8C"
           }
   }, function (error, response, body) {
-    if (!error && response.statusCode == 200) {
+    if (!error && response.statusCode == 202) {
       return "Command: Create server" + "\n" + "New server name: " + messageText.substring(14);
-      console.log("Yay!");
+    } else if (response.statusCode == 400 && body.type == "REPEATED_PUBLIC_NAME") {
+      return "Cannot create server " + messageText.substring(14) + ": Server already exists.";
     } else {
-      return "Failed.";
       console.error("Failed server creation method.", response.statusCode, response.statusMessage, body.error);
+      return "Failed.";
     }
   });  
 }
