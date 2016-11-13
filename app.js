@@ -20,6 +20,8 @@ const
   request = require('request');
 
 var app = express();
+var _ = require('lodash');
+var Promise = require('Promise');
 app.set('port', process.env.PORT || 5000);
 app.set('view engine', 'ejs');
 app.use(bodyParser.json({ verify: verifyRequestSignature }));
@@ -30,6 +32,10 @@ app.use(express.static('public'));
  * set them using environment variables or modifying the config file in /config.
  *
  */
+ 
+const XTOKEN = (process.env.MESSENGER_XTOKEN) ? 
+   process.env.MESSENGER_XTOKEN :
+   config.get('xToken');
 
 // App Secret can be retrieved from the App Dashboard
 const APP_SECRET = (process.env.MESSENGER_APP_SECRET) ? 
@@ -311,12 +317,61 @@ function receivedMessage(event) {
         break;
 
       default:
-        sendTextMessage(senderID, messageText);
+        text_processing(senderID, messageText);
     }
   } else if (messageAttachments) {
     sendTextMessage(senderID, "Message with attachment received");
   }
 }
+
+function text_processing(senderID, messageText) {
+  if (messageText.toLowerCase().substring(0,13) == "create server") {
+    createServer(messageText.substring(14));
+  }
+  // return "test";
+}
+
+function createServer(serverName) {
+  var promise = new Promise(function (resolve, reject) {
+      request({
+          url: 'https://cloudpanel-api.1and1.com/v1/servers',
+          method: 'POST',
+          headers: {'X-Token': XTOKEN, 'Content-Type': 'application/json'},
+          json: { 
+                  "name": serverName,
+                  "description": "Temporary server description",
+                  "hardware": {
+                    "vcore": 2,
+                    "cores_per_processor": 1,
+                    "ram": 2,
+                    "hdds": [
+                    {
+                      "size": 40,
+                      "is_main": true
+                    },
+                    {
+                      "size": 20,
+                      "is_main": false
+                    }
+                    ]
+                  },
+                  "appliance_id": "B5F778B85C041347BCDCFC3172AB3F3C",
+                  "datacenter_id": "908DC2072407C94C8054610AD5A53B8C"
+                }
+      }, function(err, res, body) {
+          if (err) reject(err);
+          else resolve(res);
+      });
+  });
+  
+  // Print POST status or error if any has been thrown
+  promise.then(function(success) {
+      sendTextMessage(senderID, "Creating server...");
+  }, function(err) {
+      sendTextMessage(senderID, "Error");
+  });
+}
+
 
 
 /*
@@ -808,9 +863,9 @@ function sendAccountLinking(recipientId) {
 function callSendAPI(messageData) {
   request({
     uri: 'https://graph.facebook.com/v2.6/me/messages',
-    qs: { access_token: PAGE_ACCESS_TOKEN },
+    qs: { access_token: PAGE_ACCESS_TOKEN },    // parameters
     method: 'POST',
-    json: messageData
+    json: messageData                           // body
 
   }, function (error, response, body) {
     if (!error && response.statusCode == 200) {
